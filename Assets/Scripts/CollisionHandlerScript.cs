@@ -8,31 +8,36 @@ public class CollisionHandlerScript : MonoBehaviour {
     [SerializeField] AudioClip successSound;
     [SerializeField] AudioClip explosionSound;
 
+    private bool isTransitioning = false;
+
     private void Start() {
         audioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision collision) {
-        string otherTag = collision.gameObject.tag;
-        switch (otherTag) {
-            case "Friendly":
-                Debug.Log("bumped into friendly object, doing nothing");
-                break;
-            case "Finish":
-                StartSuccessSequence();
-                break;
-            case "Fuel":
-                Debug.Log("Picked Up Fuel");
-                break;
-            default:
-                StartCrashSequence();
-                break;
+        if (!isTransitioning) {
+            string otherTag = collision.gameObject.tag;
+            switch (otherTag) {
+                case "Friendly":
+                    break;
+                case "Finish":
+                    StartSuccessSequence();
+                    break;
+                case "Fuel":
+                    Debug.Log("Picked Up Fuel");
+                    break;
+                default:
+                    StartCrashSequence();
+                    break;
+            }
         }
     }
 
     [ContextMenu("Start Crash Sequence")]
     private void StartCrashSequence() {
+        isTransitioning = true;
         Debug.Log("Starting Crash Sequence, playing clip");
+        audioSource.Stop();
         audioSource.PlayOneShot(explosionSound);
         RocketMovementScript movementScript = GetComponent<RocketMovementScript>();
         movementScript.DisableControls();
@@ -40,7 +45,9 @@ public class CollisionHandlerScript : MonoBehaviour {
     }
 
     private void StartSuccessSequence() {
+        isTransitioning = true;
         Debug.Log("Congrats, you finished level");
+        audioSource.Stop();
         audioSource.PlayOneShot(successSound);
         RocketMovementScript movementScript = GetComponent<RocketMovementScript>();
         movementScript.DisableControls();
