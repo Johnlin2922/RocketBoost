@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 426241771672372128}
   - component: {fileID: 5776264639178847679}
   - component: {fileID: 4081668830435125620}
-  - component: {fileID: 3392774711428434800}
   - component: {fileID: 550162544254950387}
   - component: {fileID: 8186225214817272731}
+  - component: {fileID: 7240425095042265414}
   m_Layer: 0
   m_Name: Rocket
   m_TagString: Untagged
@@ -136,7 +136,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!82 &3392774711428434800
+--- !u!114 &550162544254950387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2660182388256324600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3552af6e6304c3d4a9dfb42bcc3ee1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  successSound: {fileID: 8300000, guid: c66adc5d5cf7a684e88952a4de3480c5, type: 3}
+  explosionSound: {fileID: 8300000, guid: b2b2defc333132d4887029ddf26ceaaa, type: 3}
+--- !u!114 &8186225214817272731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2660182388256324600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6681ae644e8dbc84baa6a50b32db0a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boosterForce: 900
+  rotationForce: 400
+  mainEngineSound: {fileID: 8300000, guid: b39fba401965740488ac8251b16cb40d, type: 3}
+--- !u!82 &7240425095042265414
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +176,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -232,29 +261,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &550162544254950387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2660182388256324600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3552af6e6304c3d4a9dfb42bcc3ee1ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8186225214817272731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2660182388256324600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6681ae644e8dbc84baa6a50b32db0a61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boosterForce: 900
-  rotationForce: 400

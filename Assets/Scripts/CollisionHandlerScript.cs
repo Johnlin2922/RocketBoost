@@ -2,6 +2,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandlerScript : MonoBehaviour {
+
+    private AudioSource audioSource;
+
+    [SerializeField] AudioClip successSound;
+    [SerializeField] AudioClip explosionSound;
+
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     private void OnCollisionEnter(Collision collision) {
         string otherTag = collision.gameObject.tag;
         switch (otherTag) {
@@ -9,27 +19,29 @@ public class CollisionHandlerScript : MonoBehaviour {
                 Debug.Log("bumped into friendly object, doing nothing");
                 break;
             case "Finish":
-                Debug.Log("Congrats, you finished level");
                 StartSuccessSequence();
                 break;
             case "Fuel":
                 Debug.Log("Picked Up Fuel");
                 break;
             default:
-                Debug.Log("Reached defult case");
                 StartCrashSequence();
                 break;
         }
     }
 
+    [ContextMenu("Start Crash Sequence")]
     private void StartCrashSequence() {
-
+        Debug.Log("Starting Crash Sequence, playing clip");
+        audioSource.PlayOneShot(explosionSound);
         RocketMovementScript movementScript = GetComponent<RocketMovementScript>();
         movementScript.DisableControls();
         Invoke("ReloadScene", 2f);
     }
 
     private void StartSuccessSequence() {
+        Debug.Log("Congrats, you finished level");
+        audioSource.PlayOneShot(successSound);
         RocketMovementScript movementScript = GetComponent<RocketMovementScript>();
         movementScript.DisableControls();
         Invoke("LoadNextScene", 2f);

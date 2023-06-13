@@ -10,6 +10,7 @@ public class RocketMovementScript : MonoBehaviour {
 
     [SerializeField] private float boosterForce = 900;
     [SerializeField] private float rotationForce = 400;
+    [SerializeField] private AudioClip mainEngineSound;
 
     private void Start(){
         rigidBody = GetComponent<Rigidbody>();
@@ -27,7 +28,7 @@ public class RocketMovementScript : MonoBehaviour {
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) {
             rigidBody.AddRelativeForce(Vector3.up * boosterForce * Time.deltaTime);
             if (!audioSource.isPlaying) {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngineSound, 1);
             }
         } else {
             audioSource.Stop();
@@ -54,6 +55,5 @@ public class RocketMovementScript : MonoBehaviour {
 
     public void DisableControls() {
         controlsEnabled = false;
-        audioSource.Stop();
     }
 }
