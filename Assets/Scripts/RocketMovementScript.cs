@@ -12,6 +12,10 @@ public class RocketMovementScript : MonoBehaviour {
     [SerializeField] private float rotationForce = 400;
     [SerializeField] private AudioClip mainEngineSound;
 
+    [SerializeField] ParticleSystem leftThrustParticles;
+    [SerializeField] ParticleSystem rightThrustParticles;
+    [SerializeField] ParticleSystem mainThrustParticles;
+
     private void Start(){
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
@@ -30,19 +34,34 @@ public class RocketMovementScript : MonoBehaviour {
             if (!audioSource.isPlaying) {
                 audioSource.PlayOneShot(mainEngineSound, 1);
             }
+            if (!mainThrustParticles.isPlaying) {
+                mainThrustParticles.Play();
+            }
         } else {
             audioSource.Stop();
+            mainThrustParticles.Stop();
         }
     }
 
     private void ProcessRotation() {
         if (Input.GetKey(KeyCode.A)) {
+            if (!rightThrustParticles.isPlaying) {
+                rightThrustParticles.Play();
+            }
             applyRotation(rotationForce);
+        } else {
+            rightThrustParticles.Stop();
+
         }
 
-
         if (Input.GetKey(KeyCode.D)) {
+            if (!leftThrustParticles.isPlaying) {
+                leftThrustParticles.Play();
+            }
             applyRotation(-rotationForce);
+
+        } else {
+            leftThrustParticles.Stop();
         }
     }
 

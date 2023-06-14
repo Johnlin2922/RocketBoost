@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.ParticleSystem;
 
 public class CollisionHandlerScript : MonoBehaviour {
 
@@ -7,6 +8,9 @@ public class CollisionHandlerScript : MonoBehaviour {
 
     [SerializeField] AudioClip successSound;
     [SerializeField] AudioClip explosionSound;
+
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem explosionParticles;
 
     private bool isTransitioning = false;
 
@@ -35,6 +39,7 @@ public class CollisionHandlerScript : MonoBehaviour {
 
     [ContextMenu("Start Crash Sequence")]
     private void StartCrashSequence() {
+        explosionParticles.Play();
         isTransitioning = true;
         Debug.Log("Starting Crash Sequence, playing clip");
         audioSource.Stop();
@@ -45,6 +50,7 @@ public class CollisionHandlerScript : MonoBehaviour {
     }
 
     private void StartSuccessSequence() {
+        successParticles.Play();
         isTransitioning = true;
         Debug.Log("Congrats, you finished level");
         audioSource.Stop();
