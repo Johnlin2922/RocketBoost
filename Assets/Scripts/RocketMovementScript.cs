@@ -30,16 +30,20 @@ public class RocketMovementScript : MonoBehaviour {
 
     private void ProcessThrust() {
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) {
-            rigidBody.AddRelativeForce(Vector3.up * boosterForce * Time.deltaTime);
-            if (!audioSource.isPlaying) {
-                audioSource.PlayOneShot(mainEngineSound, 1);
-            }
-            if (!mainThrustParticles.isPlaying) {
-                mainThrustParticles.Play();
-            }
+            Thrust();
         } else {
             audioSource.Stop();
             mainThrustParticles.Stop();
+        }
+    }
+
+    private void Thrust() {
+        rigidBody.AddRelativeForce(Vector3.up * boosterForce * Time.deltaTime);
+        if (!audioSource.isPlaying) {
+            audioSource.PlayOneShot(mainEngineSound, 1);
+        }
+        if (!mainThrustParticles.isPlaying) {
+            mainThrustParticles.Play();
         }
     }
 
